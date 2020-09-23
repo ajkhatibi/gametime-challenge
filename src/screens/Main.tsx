@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { StatusBar, SafeAreaView, StyleSheet, SectionList, Text } from 'react-native';
-import { SearchBar } from '../components';
+import { StatusBar, SafeAreaView, StyleSheet, SectionList, View, ScrollView } from 'react-native';
+import { SearchBar, SectionListHeader, SectionItem } from '../components';
 import { useDispatch, useSelector } from 'react-redux';
 import { queryShows } from '../actions';
 import { storeInterface } from '../reducers';
@@ -14,15 +14,16 @@ export default function Main() {
         dispatch(queryShows(query))
     }, [query])
 
-    const _renderSectionHeader = ({ section }) => {
-        console.log('hi', section);
+    const renderListItems = (state: Array, type: string) => {
         return (
-            <Text style={{ color: 'white' }}>hi</Text>
-        )
-    }
-    const _renderItems = ({ items }) => {
-        return (
-            <Text style={{ color: 'white' }}>bye</Text>
+            <View style={styles.listViewSeperator}>
+                <SectionListHeader type={type} />
+                {state.data.map((item, index) => {
+                    return (
+                        <SectionItem {...item} type={type} />
+                    )
+                })}
+            </View>
         )
     }
     return (
@@ -30,12 +31,11 @@ export default function Main() {
             <StatusBar barStyle="light-content" />
             <SafeAreaView style={styles.container}>
                 <SearchBar value={query} onChangeText={(text) => setQuery(text)} />
-                <SectionList
-                    renderItem={_renderItems}
-                    renderSectionHeader={_renderSectionHeader}
-                    sections={state.data}
-                    keyExtractor={(item, index) => index.toString()}
-                />
+                <ScrollView>
+                    {renderListItems(state, "event")}
+                    {renderListItems(state, "performers")}
+                    {renderListItems(state, "venue")}
+                </ScrollView>
             </SafeAreaView>
         </>
     )
@@ -45,5 +45,8 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: 'black'
+    },
+    listViewSeperator: {
+        marginBottom: 10
     }
 });

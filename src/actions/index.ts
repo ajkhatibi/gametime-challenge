@@ -1,5 +1,6 @@
 import { Dispatch } from 'redux';
 import axios from 'axios';
+import { appTypes } from '../types';
 
 const api = axios.create({
     baseURL: "https://mobile-staging.gametime.co/v1"
@@ -11,7 +12,7 @@ export const queryShows = (q: string) => async (dispatch: Dispatch) => {
                 q
             }
         });
-        console.log(data)
+        dispatch({ type: appTypes.TRIGGER_SEARCH_QUERY, payload: data });
     } catch (error) {
         throw new Error(error);
     }

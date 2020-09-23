@@ -26,7 +26,7 @@ export const SearchBar = (props) => {
 const styles = StyleSheet.create({
     container: {
         flexDirection: 'row',
-        margin: 10,
+        margin: 20,
         alignItems: 'center',
         justifyContent: 'center'
     },
