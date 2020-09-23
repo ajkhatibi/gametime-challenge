@@ -32,7 +32,7 @@ export const SectionItem = (props: Props) => {
             const day = moment(props.event.datetime_local).format("ddd")
             return (
                 <View style={[styles.leftView]}>
-                    <Text allowFontScaling style={styles.subTitle}>{date}</Text>
+                    <Text allowFontScaling style={styles.title}>{date}</Text>
                     <Text allowFontScaling style={styles.subTitle}>{day}</Text>
                 </View>
             )
@@ -78,12 +78,15 @@ const styles = StyleSheet.create({
     },
     leftView: {
         alignItems: 'center',
-        margin: 10
+        justifyContent: 'center',
+        margin: 10,
+        width: 60
     },
     image: {
-        width: 50,
-        height: 50,
-        borderRadius: 25
+        width: 60,
+        height: 60,
+        borderRadius: 30,
+        margin: 10
     },
     iconStyle: {
         margin: 10

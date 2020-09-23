@@ -3,7 +3,7 @@ import { Text, View, TextInput, StyleSheet } from 'react-native';
 import Icon from 'react-native-vector-icons/AntDesign';
 
 
-export const SearchBar = (props) => {
+export const SearchBar = (props: any) => {
     return (
         <View style={styles.container}>
             <View style={styles.textInput}>
@@ -18,7 +18,7 @@ export const SearchBar = (props) => {
                 />
                 {props.value ? <Icon name="closecircle" color="#8b8b8b" size={15} /> : null}
             </View>
-            <Text allowFontScaling style={styles.cancel}>CANCEL</Text>
+            <Text onPress={props.onPress} allowFontScaling style={styles.cancel}>CANCEL</Text>
         </View>
     )
 }

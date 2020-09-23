@@ -1,10 +1,15 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 
-export const SectionListHeader = (props) => {
+interface Props {
+    type: string;
+}
+
+export const SectionListHeader = (props: Props) => {
+    const title = props.type.charAt(0).toLocaleUpperCase() + props.type.slice(1);
     return (
         <View style={styles.container}>
-            <Text style={styles.text}>{props.type.toUpperCase()}</Text>
+            <Text style={styles.text}>{title}</Text>
         </View>
     )
 }

@@ -14,11 +14,11 @@ export default function Main() {
         dispatch(queryShows(query))
     }, [query])
 
-    const renderListItems = (state: Array, type: string) => {
+    const renderListItems = (state: any, type: string) => {
         return (
             <View style={styles.listViewSeperator}>
                 <SectionListHeader type={type} />
-                {state.data.map((item, index) => {
+                {state.data.map((item: object) => {
                     return (
                         <SectionItem {...item} type={type} />
                     )
@@ -30,7 +30,9 @@ export default function Main() {
         <>
             <StatusBar barStyle="light-content" />
             <SafeAreaView style={styles.container}>
-                <SearchBar value={query} onChangeText={(text) => setQuery(text)} />
+                <SearchBar
+                    value={query}
+                    onChangeText={(text: string) => setQuery(text)} />
                 <ScrollView>
                     {renderListItems(state, "event")}
                     {renderListItems(state, "performers")}
