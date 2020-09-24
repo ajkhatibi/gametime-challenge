@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { StatusBar, SafeAreaView, StyleSheet, SectionList, View, ScrollView } from 'react-native';
+import { StatusBar, SafeAreaView, StyleSheet, Text, View, ScrollView } from 'react-native';
 import { SearchBar, SectionListHeader, SectionItem } from '../components';
 import { useDispatch, useSelector } from 'react-redux';
 import { queryShows } from '../actions';
@@ -32,12 +32,13 @@ export default function Main() {
             <SafeAreaView style={styles.container}>
                 <SearchBar
                     value={query}
+                    cancelButton={() => setQuery("")}
                     onChangeText={(text: string) => setQuery(text)} />
-                <ScrollView>
+                {query.length > 0 ? <ScrollView>
                     {renderListItems(state, "event")}
                     {renderListItems(state, "performers")}
                     {renderListItems(state, "venue")}
-                </ScrollView>
+                </ScrollView> : <Text style={styles.text}>No Searched results</Text>}
             </SafeAreaView>
         </>
     )
@@ -50,5 +51,11 @@ const styles = StyleSheet.create({
     },
     listViewSeperator: {
         marginBottom: 10
+    },
+    text: {
+        color: 'white',
+        textAlign: 'center',
+        margin: 10,
+        fontWeight: 'bold',
     }
 });

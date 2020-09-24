@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, View, TextInput, StyleSheet } from 'react-native';
+import { Text, View, TextInput, StyleSheet, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/AntDesign';
 
 
@@ -16,9 +16,11 @@ export const SearchBar = (props: any) => {
                     style={styles.inputStyling}
                     {...props}
                 />
-                {props.value ? <Icon name="closecircle" color="#8b8b8b" size={15} /> : null}
+                {props.value ? <Icon onPress={props.cancelButton} name="closecircle" color="#8b8b8b" size={15} /> : null}
             </View>
-            <Text onPress={props.onPress} allowFontScaling style={styles.cancel}>CANCEL</Text>
+            <TouchableOpacity onPress={props.cancelButton}>
+                <Text allowFontScaling style={styles.cancel}>CANCEL</Text>
+            </TouchableOpacity>
         </View>
     )
 }
